@@ -25,12 +25,19 @@ import PropertyClasses from './pages/technical-reference/PropertyClasses';
 import PropertyTypes from './pages/technical-reference/PropertyTypes';
 import AcceptedCreditCardTypes from './pages/technical-reference/AcceptedCreditCardTypes';
 import TestCreditCardTriggers from './pages/technical-reference/TestCreditCardTriggers';
-import Support from './pages/support/Support';
 import ContactSupport from './pages/support/ContactSupport';
-import TestingIntegration from './pages/support/TestingIntegration';
-import WebhookIntegration from './pages/support/WebhookIntegration';
 import Certification from './pages/certification/Certification';
 import Resources from './pages/resources/Resources';
+
+// SSO API Endpoints
+import AdminToken from './pages/endpoints/sso/AdminToken';
+import MemberUpsert from './pages/endpoints/sso/MemberUpsert';
+import DeepLink from './pages/endpoints/sso/DeepLink';
+
+// SSO Technical Reference
+import EnvironmentVariables from './pages/technical-reference/EnvironmentVariables';
+import MemberDataStructure from './pages/technical-reference/MemberDataStructure';
+import Authentication from './pages/technical-reference/Authentication';
 
 const App: React.FC = () => {
   return (
@@ -58,20 +65,27 @@ const App: React.FC = () => {
           <Route path="/endpoints/content/featured-hotel-deals" element={<FeaturedHotelDeals />} />
           <Route path="/endpoints/content/featured-location-deals" element={<FeaturedLocationDeals />} />
           <Route path="/endpoints/content/property-info" element={<PropertyInfo />} />
+          {/* SSO API Endpoints */}
+          <Route path="/endpoints/sso/admin-token" element={<AdminToken />} />
+          <Route path="/endpoints/sso/member-upsert" element={<MemberUpsert />} />
+          <Route path="/endpoints/sso/deep-link" element={<DeepLink />} />
+
+          {/* Technical Reference */}
+          <Route path="/technical-reference/environment-variables" element={<EnvironmentVariables />} />
+          <Route path="/technical-reference/member-data-structure" element={<MemberDataStructure />} />
+          <Route path="/technical-reference/authentication" element={<Authentication />} />
+          <Route path="/technical-reference/error-codes" element={<ErrorCodes />} />
+
+          {/* Legacy Technical Reference - Keep for compatibility */}
           <Route path="/technical-reference/sort-types" element={<SortTypes />} />
           <Route path="/technical-reference/property-amenities" element={<PropertyAmenities />} />
           <Route path="/technical-reference/property-classes" element={<PropertyClasses />} />
           <Route path="/technical-reference/property-types" element={<PropertyTypes />} />
           <Route path="/technical-reference/accepted-credit-card-types" element={<AcceptedCreditCardTypes />} />
           <Route path="/technical-reference/test-credit-card-triggers" element={<TestCreditCardTriggers />} />
-          <Route path="/technical-reference/error-codes" element={<ErrorCodes />} />
 
-          {/* Support Routes */}
-          <Route path="/support" element={<Support />} />
+          {/* Support Route */}
           <Route path="/support/contact" element={<ContactSupport />} />
-          <Route path="/support/index" element={<Support />} />
-          <Route path="/support/testing-integration" element={<TestingIntegration />} />
-          <Route path="/support/webhook-integration" element={<WebhookIntegration />} />
 
           {/* Certification Routes */}
           <Route path="/certification" element={<Certification />} />

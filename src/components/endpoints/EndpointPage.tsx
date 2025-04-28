@@ -11,7 +11,6 @@ import EndpointHeadersSection from './EndpointHeadersSection';
 import EndpointImplementationTips from './EndpointImplementationTips';
 import {
   Endpoint,
-  HttpMethod,
   HeaderParameter,
   RequestParameter,
   ResponseParameter,

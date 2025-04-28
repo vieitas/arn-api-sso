@@ -1,0 +1,195 @@
+Alliance Reservations Network TripAuthority SSO API
+
+Manage and authenticate your users with Alliance Resernation Network. You will be given separate credentials for thisAPI in addition to the credentials you received for becoming an affiliate. After you receive your API credentials, theinformation found below will enable your developer to code a version of our standard SSO model.
+
+Environment Variables
+
+Throughout this page you may see values referenced using curly braces. These relate to the selected postmanenvironment and the below table contains descriptions of the available postman environment variables. These can betweaked within the Postman application to ease testing and API familiarization. If you were provided a Postmanenvironment file for testing, please install the Postman app and click the 'Run in Postman' link at the top-right corner ofthis page. Once app is installed and Postman collection loaded, click the settings icon in the top-right corner of thePostman interface next to the Environment dropdown and select 'Manage Environments'. Next, click on the Import buttonat the bottom of the Manage Environments menu, and select the environment file provided by ARN.
+
+VARIABLES AND DESCRIPTIONSite-IdSite id used for api requests.
+API-ClientUsernameTripAuthority API username.
+API-ClientPasswordTripAuthority API password.
+SSO-SiteAdminUsernameAdmin profile with 'canManageProfiles' permission for use with SSO API endpoints.
+SSO-DomainDomain to perform SSO deep-links against.
+SSO-ReferralIdUnique member identifier used to generate or identify profile username.
+SSO-AdminBearerTokenRepresents an admin profile with 'canManageProfiles' permission to authorize SSO member create and update requests.
+Retrieved after each admin bearer token API call. Must be URL decoded before use.
+SSO-MemberDataRequired. JSON string. containing all profiles to create / update. Link to example member data JSON and also object isdescribed below.
+SSO-MemberTokenUsed for SSO deep-links. Retrieved after each member create or update API call. Must be URL decoded before use.
+ReturnTypeFormat of API response. Formats available 'json', 'xml'.
+Basic Auth Credentials
+
+
+UsernamepublictestPasswordtestme
+Webhook Integration
+
+Webhooks allow ARN to push data when certain events occur on the hotel platform, such as reservation creation andcancellation. Webhooks are sent as HTTP POST with raw XML body and Content-Type set to 'text/xml'. Further webhookdetails can be found in the XML Web Services Support Guide.
+
+Reservation Webhook Example (TestMode)
+Cancellation Webhook Example (TestMode)
+Reservation Webhook Example
+Cancellation Webhook Example
+
+
+Contacting Support
+
+Please submit all requests for support through the Partner Request form. All problems can be solved through this channel.
+
+Standard SSO Model
+
+Retrieve Admin Bearer Token.
+URL decode the Admin Bearer Token and use it to authorize a member upsert. Successful response contains aMember Token.
+Use the returned Member Token to deep-link into your hotel platform.
+
+
+GETRetrieve Admin Bearer Token
+
+https://sso.travsrv.com/api/member?siteid=64&token=ARNUSER-publicadmin&_type=json
+SSO admin bearer tokens are used to authenticate future API requests against a site administrator profile. Siteadministrators have the permission to manage other profiles on the same site. The returned token is vaild for five minutes.
+
+AUTHORIZATIONBasic AuthUsernamepublictest
+
+Passwordtestme
+
+PARAMS
+siteid64
+
+Site id to manage SSO for.
+
+tokenARNUSER-publicadmin
+
+Slug identifying profile to retrieve bearer token for.
+
+_typejson
+
+Content return type: xml or json
+
+POSTCreate/Update Member
+
+https://sso.travsrv.com/api/member?_type=json
+Using an admin bearer token, this endpoint will create or update a profile. The unique identifier per profile is 'ReferralId'. Ifa profile with referralId already exists under this site, the member will be updated. If none exists, the profile will becreated. This service returns a memberToken useful for SSO deeplinking into your site as that user. Token is valid for fiveminutes.
+
+MEMBERDATA object — Example BelowNames
+NAME array. Object details below.
+
+MemberUsername
+String. Optional. The existing MemberUsername for a profile you wish to update. Useful in combination with'UpdateMemberUsername' parameter to specify the new referralId should be used to update the members username.
+
+AdditionalInfo
+URLEncoded JSON. Optional. String of additional user-specific data in custom format. Commonly used format isurlencoded or escaped JSON.
+
+NAME object — Example BelowReferralId
+String. Unique member identifier.
+
+FirstName
+String. Member first name.
+
+LastName
+String. Member last name.
+
+Email
+String. Member email.
+
+
+HomePhone
+String. Member home phone number.
+
+Address1
+String. Member address.
+
+Address2
+String. Member address line 2.
+
+City
+String. Member city.
+
+State
+String. Member state.
+
+Country
+String. Member country.
+
+Postal
+String. Member postal code.
+
+Longitude
+String. Member longitude location.
+
+Latitude
+String. Member latitude location.
+
+Referral
+String. Useful for grouping members by a value such as cost center.
+
+RegistrationCode
+String. Used to apply coupons or other regitration codes built into your membership provider.
+
+DeleteMember
+Boolean. Marks a member as inactive.
+
+ReactivateMember
+Boolean. Marks a member as active.
+
+UpdateMemberUsername
+Boolean. Marks the request to update member username using referralId.
+
+Example MEMBERDATA
+
+Plain Text{
+"Names":[
+ Names: [ 
+{ 
+"ReferralId": "test.account@example.com", 
+"FirstName": "Stephen", 
+"LastName": "Casper", 
+"Email": "test.account@example.com", 
+"HomePhone": "913-616-6780", 
+"Address1": "6950 Wunsch Route", 
+"Address2": "260 Hand Rapid", 
+"City": "Jessikastad",
+AUTHORIZATIONBasic AuthUsernamepublictest
+
+Passwordtestme
+
+PARAMS_typejson
+
+Content return type: xml or json
+
+BodyformdatasiteId64
+
+Required. Integer. Site id to manage SSO for.
+
+tokenRequired. String. Bearer token of admin profile, must be URL decoded beforeuse.
+
+memberData{ "Names":[ { "ReferralId":"test.account@example.com", "FirstName":"Stephen",
+"LastName":"Casper", "Email":"test.account@example.com",
+"HomePhone":"913-616-6780", "Address1":"6950 Wunsch Route",
+"Address2":"260 Hand Rapid", "City":"Jessikastad", "State":"Florida",
+"Country":"SA", "Postal":"12345", "Longitude":"34.6583", "Latitude":"36.2360",
+"Referral":"CostCenter", "RegistrationCode":"CompanyId",
+"DeleteMember":false, "ReactivateMember":false,
+"UpdateMemberUsername":false, "AdditionalInfo":"" } ] }
+
+Required. JSON string. containing all profiles to create / update. Link toexample member data JSON and also object is described above.
+
+RewardsOptional Integer. Rewards are real money. redeemed to pay for a booking.
+
+PointsOptional Integer. Points are not real money, used to reduce overall bookingprice based on margin.
+
+GETDeep-link to Hotel Search
+
+
+https://reservetravel.com/v6?siteId=64&memberToken=&cid
+Using an SSO member token, you can deeplink an authenticated user into your booking engine.
+
+Additional deep-link parameter information is available within ARN's Implementation Guide.
+
+PARAMSsiteId64
+
+Required. Integer. Site id to SSO into.
+
+memberTokenRequired. String. Member token of profile you would like to login as.
+
+cidOptional. String. A Tracking parameter can be placed on a query string fortracking where a query originated. The CID parameter will persist throughoutthe sale and be contained within both the booking details and commissioningreports. More details.
+
+

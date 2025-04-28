@@ -52,9 +52,9 @@ const WebhookIntegration: React.FC = () => {
       <div id="overview" className="section">
         <h2>Overview</h2>
         <p>
-          Webhooks allow ARN to push data to your application when certain events occur on the hotel platform, such as
+          Webhooks allow ARN to push data to your application when certain events occur on the platform, such as
           reservation creation and cancellation. This enables you to build real-time integrations that respond immediately
-          to changes in reservation status.
+          to changes in reservation status for your SSO users.
         </p>
         <Alert type="info" title="XML Format">
           <p>
@@ -227,13 +227,13 @@ app.post('/webhooks/reservation', async (req, res) => {
   try {
     // Parse the XML body
     const result = await parser.parseStringPromise(req.body);
-    
+
     // Process the reservation data
     const reservation = result.ReservationResponse.Reservation;
     console.log('New reservation received:', reservation.ReservationLocator);
-    
+
     // Your business logic here...
-    
+
     // Acknowledge receipt
     res.status(200).send('OK');
   } catch (error) {
@@ -247,13 +247,13 @@ app.post('/webhooks/cancellation', async (req, res) => {
   try {
     // Parse the XML body
     const result = await parser.parseStringPromise(req.body);
-    
+
     // Process the cancellation data
     const cancellation = result.CancellationResponse.Cancellation;
     console.log('Cancellation received:', cancellation.ReservationLocator);
-    
+
     // Your business logic here...
-    
+
     // Acknowledge receipt
     res.status(200).send('OK');
   } catch (error) {

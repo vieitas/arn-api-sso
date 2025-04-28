@@ -62,10 +62,10 @@ const GettingStarted: React.FC = () => {
   return (
     <>
       <div className="content-header">
-        <h1>Getting Started with ARN Hotels API</h1>
+        <h1>Getting Started with ARN SSO API</h1>
         <p>
-          The Alliance Reservation Network (ARN) Hotels API provides programmatic access to hotel search, booking, and content services.
-          This guide will help you get started with integrating the Hotels API into your application.
+          The Alliance Reservation Network (ARN) SSO API provides programmatic access to user authentication and management services.
+          This guide will help you get started with integrating the SSO API into your application.
         </p>
       </div>
 
@@ -74,8 +74,8 @@ const GettingStarted: React.FC = () => {
       <div className="section" id="introduction">
         <h2>Introduction</h2>
         <p>
-          The Alliance Reservation Network (ARN) Hotels API provides programmatic access to hotel search, booking, and content services.
-          This guide will help you get started with integrating the Hotels API into your application.
+          The Alliance Reservation Network (ARN) SSO API provides programmatic access to user authentication and management services.
+          This guide will help you get started with integrating the SSO API into your application.
         </p>
       </div>
 
@@ -190,7 +190,7 @@ const GettingStarted: React.FC = () => {
       <div className="section" id="authentication">
         <h2>Authentication</h2>
         <p>
-          All Hotels API requests require authentication. You'll need to include your Hotels API credentials in the request headers
+          All SSO API requests require authentication. You'll need to include your SSO API credentials in the request headers
           and use Basic Authentication with your API username and password.
         </p>
 
@@ -249,19 +249,19 @@ const GettingStarted: React.FC = () => {
       <div className="section" id="environments">
         <h2>Environments</h2>
         <p>
-          The Hotels API is available in both test and production environments. We recommend using the test environment
+          The SSO API is available in both test and production environments. We recommend using the test environment
           for development and testing before moving to production.
         </p>
 
         <h3>Test Environment</h3>
         <p>
-          The Hotels API test environment is available at <code>https://api.travsrv.com</code>. Use the test credentials
+          The SSO API test environment is available at <code>https://sso.travsrv.com</code>. Use the test credentials
           provided by your Account Manager to access the test environment.
         </p>
 
         <h3>Production Environment</h3>
         <p>
-          The Hotels API production environment is also available at <code>https://api.travsrv.com</code>. You'll need to
+          The SSO API production environment is also available at <code>https://sso.travsrv.com</code>. You'll need to
           use your production credentials to access the production environment.
         </p>
 
@@ -270,82 +270,39 @@ const GettingStarted: React.FC = () => {
           The test environment has the following limitations:
         </p>
         <ul>
-          <li>Limited set of hotels and locations</li>
-          <li>Test credit cards only (no real charges)</li>
-          <li>Reservations are not sent to hotels</li>
+          <li>Test member profiles only (not real users)</li>
+          <li>No impact on production data</li>
           <li>Rate limits are more relaxed</li>
+          <li>Tokens have the same expiration rules (5 minutes)</li>
         </ul>
       </div>
 
       <div className="section" id="api-versions">
-        <h2>Hotels API Versions</h2>
+        <h2>SSO API Versions</h2>
         <p>
-          Hotels API versions can be controlled using the <code>Accept-version</code> header on each request.
-          Version 1 is the default version returned, but version 2.1 is the recommended version to use for new integrations.
+          The SSO API currently has a single version. No version header is required for API requests.
         </p>
 
-        <h3>Specifying the API Version</h3>
+        <h3>Response Formats</h3>
         <p>
-          You can specify the API version using the <code>Accept-version</code> header. For example:
+          The SSO API supports both JSON and XML response formats. You can specify the response format using the <code>_type</code> parameter in your requests.
         </p>
         <CodeBlock
-          code="Accept-version: 2"
+          code="https://sso.travsrv.com/api/member?siteid=64&token=ARNUSER-publicadmin&_type=json"
           language="http"
         />
 
-        <h3>Version History</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Version</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Version 1 is the initial release of the Hotel API. Default version that is returned by API.</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Version 2 introduces consistent array structures for Hotel, RatePlan, Room and NightlyRate in JSON responses.</td>
-            </tr>
-            <tr>
-              <td>2.1</td>
-              <td>
-                Version 2.1 introduces the DueOnArrival element, with information related to fees that are due at property,
-                and the bestdeal sort type option. <strong>Version 2.1 is the recommended version to use for new integrations.</strong>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3>DueOnArrival Example</h3>
+        <h3>Token Expiration</h3>
         <p>
-          The DueOnArrival element introduced in version 2.1 provides information about fees that are due at the property:
+          Both admin bearer tokens and member tokens are valid for five minutes after they are issued. Make sure to handle token expiration in your application.
         </p>
-        <CodeBlock
-          code={`"Room": {
-  "DueOnArrival": {
-    "Total": {
-      "@Amount": "34.20",
-      "@CurrencyCode": "USD"
-    },
-    "Fee": {
-      "@Title": "Resort Fee"
-    }
-  }
-}`}
-          language="json"
-          title="DueOnArrival Example"
-        />
       </div>
 
       <div className="section" id="first-request">
         <h2>First Request</h2>
         <p>
           Once you receive your test credentials from your Account Manager, you can make your first request to the API.
-          Let's look at a simple request to the City Search endpoint as an example.
+          Let's look at a simple request to the Retrieve Admin Bearer Token endpoint as an example.
         </p>
 
         <h3 id="request-parameters">Request Parameters</h3>
@@ -361,102 +318,42 @@ const GettingStarted: React.FC = () => {
           </thead>
           <tbody>
             <tr>
-              <td>type</td>
-              <td>string</td>
-              <td>Yes</td>
-              <td>Must be "cities" for this endpoint</td>
-            </tr>
-            <tr>
-              <td>query</td>
-              <td>string</td>
-              <td>Yes</td>
-              <td>The search term (city name or partial name)</td>
-            </tr>
-            <tr>
-              <td>maxresults</td>
+              <td>siteid</td>
               <td>integer</td>
-              <td>No</td>
-              <td>Maximum number of results to return (default: 10)</td>
+              <td>Yes</td>
+              <td>Site id to manage SSO for</td>
+            </tr>
+            <tr>
+              <td>token</td>
+              <td>string</td>
+              <td>Yes</td>
+              <td>Slug identifying profile to retrieve bearer token for</td>
             </tr>
             <tr>
               <td>_type</td>
               <td>string</td>
               <td>No</td>
-              <td>Response format (json or xml, default: json)</td>
+              <td>Content return type: xml or json</td>
             </tr>
           </tbody>
         </table>
 
         <h3 id="request-example">Request Example</h3>
         <CodeBlock
-          code="https://api.travsrv.com/api/widget?type=cities&query=new&maxresults=5&_type=json"
+          code="https://sso.travsrv.com/api/member?siteid=64&token=ARNUSER-publicadmin&_type=json"
           language="http"
           title="HTTP Request"
         />
 
         <h3 id="response-example">Response Example</h3>
         <p>
-          The response is a JSON array containing cities that match the search query "new". Each city object includes
-          detailed information such as the city ID, name, country, state, and geographic coordinates.
+          The response is a JSON object containing the admin bearer token. This token can be used to authenticate requests to create or update member profiles.
         </p>
         <CodeBlock
-          code={`[
-  {
-    "Id": 29805,
-    "Name": "New York, NY, United States",
-    "Type": "City",
-    "Country": "US",
-    "CountryName": "United States",
-    "State": "NY",
-    "StateName": "New York",
-    "Latitude": 40.7127753,
-    "Longitude": -74.0059728
-  },
-  {
-    "Id": 29806,
-    "Name": "New Orleans, LA, United States",
-    "Type": "City",
-    "Country": "US",
-    "CountryName": "United States",
-    "State": "LA",
-    "StateName": "Louisiana",
-    "Latitude": 29.9510658,
-    "Longitude": -90.0715323
-  },
-  {
-    "Id": 29807,
-    "Name": "Newark, NJ, United States",
-    "Type": "City",
-    "Country": "US",
-    "CountryName": "United States",
-    "State": "NJ",
-    "StateName": "New Jersey",
-    "Latitude": 40.7357,
-    "Longitude": -74.1724
-  },
-  {
-    "Id": 29808,
-    "Name": "Newport Beach, CA, United States",
-    "Type": "City",
-    "Country": "US",
-    "CountryName": "United States",
-    "State": "CA",
-    "StateName": "California",
-    "Latitude": 33.6189,
-    "Longitude": -117.9298
-  },
-  {
-    "Id": 29809,
-    "Name": "New Haven, CT, United States",
-    "Type": "City",
-    "Country": "US",
-    "CountryName": "United States",
-    "State": "CT",
-    "StateName": "Connecticut",
-    "Latitude": 41.3082,
-    "Longitude": -72.9282
-  }
-]`}
+          code={`{
+  "MemberToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "Success": true
+}`}
           language="json"
           title="JSON Response"
         />
@@ -472,49 +369,14 @@ const GettingStarted: React.FC = () => {
           </thead>
           <tbody>
             <tr>
-              <td>Id</td>
-              <td>Integer</td>
-              <td>Unique identifier for the city</td>
-            </tr>
-            <tr>
-              <td>Name</td>
+              <td>MemberToken</td>
               <td>String</td>
-              <td>Full name of the city, including state and country</td>
+              <td>Bearer token for authenticating future API requests. Valid for five minutes.</td>
             </tr>
             <tr>
-              <td>Type</td>
-              <td>String</td>
-              <td>Type of location (City)</td>
-            </tr>
-            <tr>
-              <td>Country</td>
-              <td>String</td>
-              <td>Country code (e.g., US)</td>
-            </tr>
-            <tr>
-              <td>CountryName</td>
-              <td>String</td>
-              <td>Full country name</td>
-            </tr>
-            <tr>
-              <td>State</td>
-              <td>String</td>
-              <td>State/province code (e.g., NY)</td>
-            </tr>
-            <tr>
-              <td>StateName</td>
-              <td>String</td>
-              <td>Full state/province name</td>
-            </tr>
-            <tr>
-              <td>Latitude</td>
-              <td>Float</td>
-              <td>Latitude coordinate of the city</td>
-            </tr>
-            <tr>
-              <td>Longitude</td>
-              <td>Float</td>
-              <td>Longitude coordinate of the city</td>
+              <td>Success</td>
+              <td>Boolean</td>
+              <td>Indicates if the request was successful</td>
             </tr>
           </tbody>
         </table>
@@ -524,7 +386,7 @@ const GettingStarted: React.FC = () => {
       <div className="section" id="testing-resources">
         <h2>Testing Resources</h2>
         <p>
-          To help you test your integration with the Hotels API, we provide several resources that you can use during development:
+          To help you test your integration with the SSO API, we provide several resources that you can use during development:
         </p>
 
         <h3>Test Credentials</h3>
@@ -535,6 +397,7 @@ const GettingStarted: React.FC = () => {
         <ul>
           <li>API username and password</li>
           <li>Site ID</li>
+          <li>Admin profile token</li>
         </ul>
         <p>
           These credentials provide access to the full functionality of the API in the test environment.
@@ -543,16 +406,11 @@ const GettingStarted: React.FC = () => {
 
         <h3>Test Data</h3>
         <p>
-          In the test environment, you can use any hotel available in the system for your testing purposes.
+          In the test environment, you can create and update test member profiles without affecting production data.
         </p>
         <p>
-          For test credit cards, we provide a variety of test card numbers that trigger different responses.
-          See the <Link to="/technical-reference/test-credit-card-triggers">Test Credit Card Triggers</Link> documentation
-          for specific card numbers and their behaviors.
-        </p>
-        <p>
-          The test environment allows you to simulate the complete booking flow, including availability search,
-          rate details, reservation creation, and cancellation, without creating actual bookings at hotels.
+          The test environment allows you to simulate the complete SSO flow, including retrieving admin bearer tokens,
+          creating/updating member profiles, and deep-linking users into the booking engine.
         </p>
 
         <h3>Postman Collection</h3>
@@ -573,16 +431,16 @@ const GettingStarted: React.FC = () => {
         </p>
         <ul>
           <li>
-            Try the <Link to="/endpoints/typeahead/city-search">City Search</Link> endpoint with different query parameters
+            Try the <Link to="/endpoints/sso/admin-token">Retrieve Admin Bearer Token</Link> endpoint with different query parameters
           </li>
           <li>
-            Explore other Typeahead endpoints like <Link to="/endpoints/typeahead/airport-search">Airport Search</Link> or <Link to="/endpoints/typeahead/landmark-search">Landmark Search</Link>
+            Learn about the <Link to="/endpoints/sso/member-upsert">Create/Update Member</Link> endpoint to manage member profiles
           </li>
           <li>
-            Learn about the <Link to="/endpoints/hotel/availability">Hotel Availability Search</Link> endpoint to find available hotels
+            Explore the <Link to="/endpoints/sso/deep-link">Deep-link to Hotel Search</Link> endpoint to authenticate users
           </li>
           <li>
-            Check out the <Link to="/technical-reference/error-codes">Error Codes</Link> documentation to understand possible API responses
+            Check out the <Link to="/technical-reference/member-data-structure">Member Data Structure</Link> documentation to understand the member data format
           </li>
         </ul>
         <p>

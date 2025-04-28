@@ -7,9 +7,9 @@ interface PostmanButtonProps {
 }
 
 const PostmanButton: React.FC<PostmanButtonProps> = ({ collectionUrl }) => {
-  // Use the provided URL or default to our local collection
+  // Use the provided URL or default to our SSO API collection
   const postmanUrl = collectionUrl ||
-    "https://app.getpostman.com/run-collection/10758950-edba5898-7edc-495e-a247-8f2d1b5f601b-SzmfXHCg?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D10758950-edba5898-7edc-495e-a247-8f2d1b5f601b-SzmfXHCg%26entityType%3Dcollection%26workspaceId%3D300383e6-2648-4250-8ae5-25ba8bf3e90f";
+    "https://elements.getpostman.com/view/import?collection=10758950-63d55121-135b-423a-8b5e-0dbd734360b0-Szf9UmbW&&referrer=https%3A%2F%2Fdocumenter.getpostman.com%2Fview%2F10758950%2FSzf9UmbW%3Fversion%3Dlatest&versionTag=latest&environment=10758950-1d87f11e-f947-44aa-a7dd-47018ef2e89e-Szf9UmbW&source=documenter";
 
   return (
     <div className="postman-button-container">
@@ -18,12 +18,12 @@ const PostmanButton: React.FC<PostmanButtonProps> = ({ collectionUrl }) => {
         target="_blank"
         rel="noopener noreferrer"
         className="postman-button"
-        title="Run Hotels API in Postman"
+        title="Run in Postman"
         onClick={() => trackPostmanButtonClick()}
       >
         <img
           src={process.env.PUBLIC_URL + "/postman/run-in-postman-button.jpg"}
-          alt="Run Hotels API in Postman"
+          alt="Run in Postman"
           style={{ height: '35px', width: 'auto' }}
         />
       </a>

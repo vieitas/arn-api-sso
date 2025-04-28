@@ -23,7 +23,7 @@ const ContactSupport: React.FC = () => {
     <>
       <div className="content-header">
         <h1>Contacting Support</h1>
-        <p>How to get help with your ARN API integration</p>
+        <p>How to get help with your ARN SSO API integration</p>
       </div>
 
       <OnThisPage sections={sections} />

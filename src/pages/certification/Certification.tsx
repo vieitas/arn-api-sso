@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import OnThisPage from '../../components/common/OnThisPage';
 import './Certification.css';
 
@@ -64,8 +63,8 @@ const Certification: React.FC = () => {
   return (
     <>
       <div className="content-header">
-        <h1>Hotels API Certification Program</h1>
-        <p>Complete guide to becoming a certified ARN Hotels API integration partner</p>
+        <h1>SSO API Certification Program</h1>
+        <p>Complete guide to becoming a certified ARN SSO API integration partner</p>
       </div>
 
       <OnThisPage sections={sections} />
@@ -73,7 +72,7 @@ const Certification: React.FC = () => {
       <div id="overview" className="section">
         <h2>Overview</h2>
         <p>
-          The ARN Hotels API Certification Program is designed to ensure that all integrations with our Hotels API meet the highest
+          The ARN SSO API Certification Program is designed to ensure that all integrations with our SSO API meet the highest
           standards of quality, security, and performance. Becoming a certified partner provides numerous benefits,
           including enhanced support, access to additional features, and official recognition as a trusted integration partner.
         </p>
@@ -295,35 +294,31 @@ const Certification: React.FC = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td>Search</td>
+                  <td>Authentication</td>
                   <td>
                     <ul>
-                      <li>City Search</li>
-                      <li>Property Search</li>
+                      <li>Retrieve Admin Bearer Token</li>
                     </ul>
                   </td>
-                  <td>Must support location and property search functionality</td>
+                  <td>Must support retrieving admin bearer tokens for authentication</td>
                 </tr>
                 <tr>
-                  <td>Availability</td>
+                  <td>Member Management</td>
                   <td>
                     <ul>
-                      <li>Availability Search</li>
-                      <li>Rate Details</li>
+                      <li>Create/Update Member</li>
                     </ul>
                   </td>
-                  <td>Must support searching for available properties and retrieving rate details</td>
+                  <td>Must support creating and updating member profiles</td>
                 </tr>
                 <tr>
-                  <td>Booking</td>
+                  <td>Deep-linking</td>
                   <td>
                     <ul>
-                      <li>Reservation Creation</li>
-                      <li>Itinerary Retrieval</li>
-                      <li>Reservation Cancellation</li>
+                      <li>Deep-link to Hotel Search</li>
                     </ul>
                   </td>
-                  <td>Must support full booking lifecycle management</td>
+                  <td>Must support deep-linking authenticated users into the booking engine</td>
                 </tr>
               </tbody>
             </table>
@@ -333,10 +328,10 @@ const Certification: React.FC = () => {
             Additionally, your integration must handle all standard business flows, including:
           </p>
           <ul>
-            <li>Search-to-book flow with proper session management</li>
-            <li>Booking modification and cancellation flows</li>
+            <li>Complete SSO flow with proper token management</li>
+            <li>Member creation and update flows</li>
             <li>Error recovery and retry mechanisms</li>
-            <li>Proper handling of edge cases (e.g., sold-out properties, rate changes)</li>
+            <li>Proper handling of edge cases (e.g., token expiration, invalid member data)</li>
           </ul>
         </div>
 

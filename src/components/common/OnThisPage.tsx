@@ -112,22 +112,22 @@ const OnThisPage: React.FC<OnThisPageProps> = ({
         <ul>
           {sections.map((section) => (
             <li key={section.id}>
-              <a
-                href="javascript:void(0)"
+              <button
+                className="section-link"
                 onClick={() => scrollToSection(section.id)}
               >
                 {section.title}
-              </a>
+              </button>
               {section.subsections && section.subsections.length > 0 && (
                 <ul className="submenu">
                   {section.subsections.map((subsection) => (
                     <li key={subsection.id}>
-                      <a
-                        href="javascript:void(0)"
+                      <button
+                        className="subsection-link"
                         onClick={() => scrollToSection(subsection.id)}
                       >
                         {subsection.title}
-                      </a>
+                      </button>
                     </li>
                   ))}
                 </ul>
