@@ -30,8 +30,7 @@ jobs:
 
       - name: Add mirror remote
         run: |
-          git remote add mirror-sso \
-            https://x-access-token:${GH_TOKEN}@github.com/739117_WYND/SSO-API-Documentation.git
+          git remote add mirror-sso https://x-access-token:${GH_TOKEN}@github.com/739117_WYND/SSO-API-Documentation.git
 
       - name: Push to SSO-API-Documentation
         run: |
