@@ -28,9 +28,13 @@ jobs:
             git commit -m "Remove workflows for SSO mirror"
           fi
 
-      - name: Add mirror remote
+      - name: Add or update mirror remote
         run: |
-          git remote add mirror-sso https://x-access-token:${GH_TOKEN}@github.com/739117_WYND/SSO-API-Documentation.git
+          if git remote get-url mirror-sso > /dev/null 2>&1; then
+            git remote set-url mirror-sso https://x-access-token:${GH_TOKEN}@github.com/739117_WYND/SSO-API-Documentation.git
+          else
+            git remote add mirror-sso https://x-access-token:${GH_TOKEN}@github.com/739117_WYND/SSO-API-Documentation.git
+          fi
 
       - name: Push to SSO-API-Documentation
         run: |
