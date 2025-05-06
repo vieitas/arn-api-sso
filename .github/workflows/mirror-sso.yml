@@ -30,10 +30,10 @@ jobs:
 
       - name: Add or update mirror remote
         run: |
-          if git remote get-url mirror-sso > /dev/null 2>&1; then
-            git remote set-url mirror-sso https://x-access-token:${GH_TOKEN}@github.com/739117_WYND/SSO-API-Documentation.git
+          if git remote | grep -q mirror-sso; then
+            git remote set-url --push mirror-sso https://x-access-token:${GH_TOKEN}@github.com/739117_WYND/SSO-API-Documentation.git
           else
-            git remote add mirror-sso https://x-access-token:${GH_TOKEN}@github.com/739117_WYND/SSO-API-Documentation.git
+            git remote add --mirror=push mirror-sso https://x-access-token:${GH_TOKEN}@github.com/739117_WYND/SSO-API-Documentation.git
           fi
 
       - name: Push to SSO-API-Documentation
