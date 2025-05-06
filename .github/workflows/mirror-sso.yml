@@ -3,7 +3,7 @@ name: Mirror to SSO-API-Documentation
 on:
   push:
     branches:
-      - master
+      - master   # ou 'main', se for o seu caso
 
 jobs:
   mirror-sso:
