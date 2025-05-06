@@ -1,0 +1,59 @@
+/* Form validation styles */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  border: 1px solid #333;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(0, 102, 204, 0.25);
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  display: none;
+}
+
+.form-group.error .error-message {
+  display: block;
+}
+
+.form-group.error input,
+.form-group.error select,
+.form-group.error textarea {
+  border-color: var(--error-color);
+}
+
+/* Form submission success message */
+.form-success {
+  background-color: rgba(40, 167, 69, 0.1);
+  border: 1px solid var(--success-color);
+  border-radius: 4px;
+  padding: 15px;
+  margin-top: 20px;
+  display: none;
+}
+
+.form-success.show {
+  display: block;
+}
+
+/* Form submission error message */
+.form-error {
+  background-color: rgba(220, 53, 69, 0.1);
+  border: 1px solid var(--error-color);
+  border-radius: 4px;
+  padding: 15px;
+  margin-top: 20px;
+  display: none;
+}
+
+.form-error.show {
+  display: block;
+}
