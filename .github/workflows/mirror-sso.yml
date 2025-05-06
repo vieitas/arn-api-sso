@@ -37,4 +37,3 @@ jobs:
         run: |
           git push mirror-sso master --force
           git push mirror-sso --tags
-``
