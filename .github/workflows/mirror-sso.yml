@@ -3,7 +3,7 @@ name: Mirror to SSO-API-Documentation
 on:
   push:
     branches:
-      - master  # Altere para 'main' se sua branch padrão for 'main'
+      - master
 
 jobs:
   mirror-sso:
@@ -28,7 +28,7 @@ jobs:
             git commit -m "Remove workflows for SSO mirror"
           fi
 
-      - name: Add or update mirror remote (sem --mirror)
+      - name: Add or update mirror remote
         run: |
           if git remote get-url mirror-sso >/dev/null 2>&1; then
             git remote set-url mirror-sso https://x-access-token:${GH_TOKEN}@github.com/739117_WYND/SSO-API-Documentation.git
