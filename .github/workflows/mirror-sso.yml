@@ -3,7 +3,7 @@ name: Mirror to SSO-API-Documentation
 on:
   push:
     branches:
-      - master    # ou sua branch padrão
+      - master   # ou 'main' se esse for o seu caso
 
 jobs:
   mirror-sso:
@@ -12,14 +12,12 @@ jobs:
       GH_TOKEN: ${{ secrets.GH_TOKEN_SSO }}
 
     steps:
-      # 1) Checkout completo sem credential helper
       - name: Checkout full history
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
           persist-credentials: false
 
-      # 2) Remove workflows para não ativar Actions no destino
       - name: Strip workflows before pushing
         run: |
           git config user.name "github-actions"
@@ -30,14 +28,15 @@ jobs:
             git commit -m "Remove workflows for SSO mirror"
           fi
 
-      # 3) Adiciona o remote com o token embutido
-      - name: Add mirror remote
+      - name: Add or update mirror remote
         run: |
-          git remote add mirror-sso \
-            https://x-access-token:${GH_TOKEN}@github.com/739117_WYND/SSO-API-Documentation.git
+          if git remote get-url mirror-sso >/dev/null 2>&1; then
+            git remote set-url mirror-sso https://x-access-token:${GH_TOKEN}@github.com/739117_WYND/SSO-API-Documentation.git
+          else
+            git remote add mirror-sso https://x-access-token:${GH_TOKEN}@github.com/739117_WYND/SSO-API-Documentation.git
+          fi
 
-      # 4) Push forçado da branch master e de todas as tags
-      - name: Push to SSO-API-Documentation
+      - name: Push branch and tags to mirror
         run: |
-          git push mirror-sso HEAD:master --force
+          git push mirror-sso master --force
           git push mirror-sso --tags
