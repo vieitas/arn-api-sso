@@ -12,11 +12,11 @@ git commit -m "%commit_msg%"
 
 echo.
 echo Pushing to personal repository...
-git push origin main
+git push origin master
 
 echo.
 echo Pushing to company repository...
-git push empresa main:sso-api/main -f
+git push empresa master:sso-api/main -f
 
 echo.
 echo Done!

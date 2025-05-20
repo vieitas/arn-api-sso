@@ -1,7 +1,7 @@
 @echo off
 echo Please enter your PERSONAL GitHub Token:
 set /p personal_token="> "
-git remote add origin "https://x-access-token:%personal_token%@github.com/vieitas/arn-sso-api.git"
+git remote add origin "https://x-access-token:%personal_token%@github.com/vieitas/arn-api-sso.git"
 
 echo.
 echo Please enter your COMPANY GitHub Token (with SSO):
