@@ -67,8 +67,17 @@ const MemberUpsert: React.FC = () => {
     },
   ];
 
+  // Custom description with link
+  const customDescription = (
+    <>
+      Create or update a member profile using an admin bearer token. For detailed information about
+      the member data structure and valid parameters, see the{' '}
+      <Link to="/technical-reference/member-data-structure">Member Data Structure</Link> documentation.
+    </>
+  );
+
   return (
-    <EndpointPage endpoint={endpoint} sections={sections}>
+    <EndpointPage endpoint={endpoint} sections={sections} description={customDescription}>
       <div id="member-data-reference" className="section">
         <h2>Member Data Structure</h2>
         <p>

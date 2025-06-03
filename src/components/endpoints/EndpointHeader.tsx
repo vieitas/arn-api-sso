@@ -2,7 +2,7 @@ import React from 'react';
 
 interface EndpointHeaderProps {
   title: string;
-  description: string;
+  description: string | React.ReactNode;
   method: 'GET' | 'POST' | 'PUT' | 'DELETE';
   url: string;
 }

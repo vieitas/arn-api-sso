@@ -66,7 +66,7 @@ export interface EndpointPageProps {
   /**
    * Description of the page (overrides endpoint.description)
    */
-  description?: string;
+  description?: string | React.ReactNode;
 
   /**
    * Sections to display in the OnThisPage component
