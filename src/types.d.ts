@@ -6,7 +6,7 @@ declare module 'react' {
   export type CSSProperties = React.CSSProperties;
 }
 
-// Define tipos para os componentes
+// Define types for components
 export interface CodeExample {
   language: string;
   label: string;

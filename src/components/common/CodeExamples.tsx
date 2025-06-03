@@ -12,10 +12,10 @@ const CodeExamples: React.FC<CodeExamplesProps> = ({ examples }) => {
     return <p>No code examples available.</p>;
   }
 
-  // Definir os exemplos padrão na ordem correta
+  // Define standard examples in correct order
   const standardExamples = ['cURL', 'Python', 'JavaScript', 'PHP'];
 
-  // Mapear os exemplos para os nomes padrão
+  // Map examples to standard names
   const exampleMap = {
     'bash': 'cURL',
     'python': 'Python',
@@ -23,7 +23,7 @@ const CodeExamples: React.FC<CodeExamplesProps> = ({ examples }) => {
     'php': 'PHP'
   };
 
-  // Ordenar os exemplos conforme a ordem padrão
+  // Sort examples according to standard order
   const sortedExamples = [...examples].sort((a, b) => {
     const labelA = a.label || exampleMap[a.language] || a.language;
     const labelB = b.label || exampleMap[b.language] || b.language;
@@ -34,9 +34,9 @@ const CodeExamples: React.FC<CodeExamplesProps> = ({ examples }) => {
     return (indexA === -1 ? 999 : indexA) - (indexB === -1 ? 999 : indexB);
   });
 
-  // Mapear os exemplos para tabs com os nomes padrão
+  // Map examples to tabs with standard names
   const tabs = sortedExamples.map(example => {
-    // Usar o nome padrão se disponível, caso contrário usar o label fornecido ou o nome da linguagem
+    // Use standard name if available, otherwise use provided label or language name
     const label = exampleMap[example.language] || example.label || example.language;
 
     return {

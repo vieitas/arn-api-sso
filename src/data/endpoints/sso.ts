@@ -233,7 +233,7 @@ curl_close($curl);
   {
     id: 'member-upsert',
     title: 'Create/Update Member',
-    description: 'Create or update a member profile using an admin bearer token. For detailed information about the member data structure and valid parameters, see the Member Data Structure documentation.',
+    description: 'Create or update a member profile using an admin bearer token. For detailed information about the member data structure and valid parameters, see the <a href="#/technical-reference/member-data-structure">Member Data Structure</a> documentation.',
     method: 'POST',
     url: 'https://sso.travsrv.com/api/member',
     category: 'hotel', // Reusing existing category for compatibility
