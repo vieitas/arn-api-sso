@@ -144,24 +144,7 @@ const MemberDataStructure: React.FC = () => {
               <td>No</td>
               <td>Registration code, such as a company ID or membership number.</td>
             </tr>
-            <tr>
-              <td>DeleteMember</td>
-              <td>boolean</td>
-              <td>No</td>
-              <td>Flag to indicate if the member should be deleted. Default is false.</td>
-            </tr>
-            <tr>
-              <td>ReactivateMember</td>
-              <td>boolean</td>
-              <td>No</td>
-              <td>Flag to indicate if the member should be reactivated. Default is false.</td>
-            </tr>
-            <tr>
-              <td>UpdateMemberUsername</td>
-              <td>boolean</td>
-              <td>No</td>
-              <td>Flag to indicate if the member's username should be updated. Default is false.</td>
-            </tr>
+
             <tr>
               <td>AdditionalInfo</td>
               <td>string</td>
@@ -196,9 +179,6 @@ const MemberDataStructure: React.FC = () => {
       "Latitude": "36.2360",
       "Referral": "CostCenter",
       "RegistrationCode": "CompanyId",
-      "DeleteMember": false,
-      "ReactivateMember": false,
-      "UpdateMemberUsername": false,
       "AdditionalInfo": ""
     }
   ]

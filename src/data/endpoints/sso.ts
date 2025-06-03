@@ -144,7 +144,7 @@ response = requests.get(
 if response.status_code == 200:
     data = response.json()
     print(json.dumps(data, indent=2))
-    
+
     # Store the token for future use
     member_token = data.get("MemberToken")
     print(f"Bearer token: {member_token}")
@@ -180,7 +180,7 @@ axios.get("https://sso.travsrv.com/api/member", {
 })
   .then(response => {
     console.log(JSON.stringify(response.data, null, 2));
-    
+
     // Store the token for future use
     const memberToken = response.data.MemberToken;
     console.log(\`Bearer token: \${memberToken}\`);
@@ -216,7 +216,7 @@ $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 if ($httpCode === 200) {
     $data = json_decode($response, true);
     echo json_encode($data, JSON_PRETTY_PRINT);
-    
+
     // Store the token for future use
     $memberToken = $data['MemberToken'];
     echo "Bearer token: " . $memberToken;
@@ -233,7 +233,7 @@ curl_close($curl);
   {
     id: 'member-upsert',
     title: 'Create/Update Member',
-    description: 'Create or update a member profile using an admin bearer token',
+    description: 'Create or update a member profile using an admin bearer token. For detailed information about the member data structure and valid parameters, see the Member Data Structure documentation.',
     method: 'POST',
     url: 'https://sso.travsrv.com/api/member',
     category: 'hotel', // Reusing existing category for compatibility
@@ -314,7 +314,7 @@ Host: sso.travsrv.com
 Content-Type: application/x-www-form-urlencoded
 Authorization: Basic YOUR_BASE64_ENCODED_CREDENTIALS
 
-siteId=64&token=YOUR_URL_DECODED_ADMIN_BEARER_TOKEN&memberData={ "Names":[ { "ReferralId":"test.account@example.com", "FirstName":"Stephen", "LastName":"Casper", "Email":"test.account@example.com", "HomePhone":"913-616-6780", "Address1":"6950 Wunsch Route", "Address2":"260 Hand Rapid", "City":"Jessikastad", "State":"Florida", "Country":"SA", "Postal":"12345", "Longitude":"34.6583", "Latitude":"36.2360", "Referral":"CostCenter", "RegistrationCode":"CompanyId", "DeleteMember":false, "ReactivateMember":false, "UpdateMemberUsername":false, "AdditionalInfo":"" } ] }`,
+siteId=64&token=YOUR_URL_DECODED_ADMIN_BEARER_TOKEN&memberData={ "Names":[ { "ReferralId":"test.account@example.com", "FirstName":"Stephen", "LastName":"Casper", "Email":"test.account@example.com", "HomePhone":"913-616-6780", "Address1":"6950 Wunsch Route", "Address2":"260 Hand Rapid", "City":"Jessikastad", "State":"Florida", "Country":"SA", "Postal":"12345", "Longitude":"34.6583", "Latitude":"36.2360", "Referral":"CostCenter", "RegistrationCode":"CompanyId", "AdditionalInfo":"" } ] }`,
     responseExample: `{
   "MemberToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
   "Success": true
@@ -360,7 +360,7 @@ siteId=64&token=YOUR_URL_DECODED_ADMIN_BEARER_TOKEN&memberData={ "Names":[ { "Re
   -H "Authorization: Basic YOUR_BASE64_ENCODED_CREDENTIALS" \\
   --data-urlencode "siteId=64" \\
   --data-urlencode "token=YOUR_URL_DECODED_ADMIN_BEARER_TOKEN" \\
-  --data-urlencode 'memberData={ "Names":[ { "ReferralId":"test.account@example.com", "FirstName":"Stephen", "LastName":"Casper", "Email":"test.account@example.com", "HomePhone":"913-616-6780", "Address1":"6950 Wunsch Route", "Address2":"260 Hand Rapid", "City":"Jessikastad", "State":"Florida", "Country":"SA", "Postal":"12345", "Longitude":"34.6583", "Latitude":"36.2360", "Referral":"CostCenter", "RegistrationCode":"CompanyId", "DeleteMember":false, "ReactivateMember":false, "UpdateMemberUsername":false, "AdditionalInfo":"" } ] }'`
+  --data-urlencode 'memberData={ "Names":[ { "ReferralId":"test.account@example.com", "FirstName":"Stephen", "LastName":"Casper", "Email":"test.account@example.com", "HomePhone":"913-616-6780", "Address1":"6950 Wunsch Route", "Address2":"260 Hand Rapid", "City":"Jessikastad", "State":"Florida", "Country":"SA", "Postal":"12345", "Longitude":"34.6583", "Latitude":"36.2360", "Referral":"CostCenter", "RegistrationCode":"CompanyId", "AdditionalInfo":"" } ] }'`
       },
       {
         language: 'python',
@@ -405,9 +405,6 @@ member_data = {
             "Latitude": "36.2360",
             "Referral": "CostCenter",
             "RegistrationCode": "CompanyId",
-            "DeleteMember": False,
-            "ReactivateMember": False,
-            "UpdateMemberUsername": False,
             "AdditionalInfo": ""
         }
     ]
@@ -437,7 +434,7 @@ response = requests.post(
 if response.status_code == 200:
     data = response.json()
     print(json.dumps(data, indent=2))
-    
+
     # Store the token for future use
     member_token = data.get("MemberToken")
     print(f"Member token: {member_token}")
@@ -487,9 +484,6 @@ const memberData = {
       Latitude: "36.2360",
       Referral: "CostCenter",
       RegistrationCode: "CompanyId",
-      DeleteMember: false,
-      ReactivateMember: false,
-      UpdateMemberUsername: false,
       AdditionalInfo: ""
     }
   ]
@@ -513,7 +507,7 @@ axios.post("https://sso.travsrv.com/api/member", querystring.stringify(formData)
 })
   .then(response => {
     console.log(JSON.stringify(response.data, null, 2));
-    
+
     // Store the token for future use
     const memberToken = response.data.MemberToken;
     console.log(\`Member token: \${memberToken}\`);
@@ -560,9 +554,6 @@ $memberData = [
             "Latitude" => "36.2360",
             "Referral" => "CostCenter",
             "RegistrationCode" => "CompanyId",
-            "DeleteMember" => false,
-            "ReactivateMember" => false,
-            "UpdateMemberUsername" => false,
             "AdditionalInfo" => ""
         ]
     ]
@@ -590,7 +581,7 @@ $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 if ($httpCode === 200) {
     $data = json_decode($response, true);
     echo json_encode($data, JSON_PRETTY_PRINT);
-    
+
     // Store the token for future use
     $memberToken = $data['MemberToken'];
     echo "Member token: " . $memberToken;
