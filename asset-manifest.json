@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/arn-api-sso/static/css/main.d84c3858.css",
-    "main.js": "/arn-api-sso/static/js/main.dfd2537b.js",
+    "main.js": "/arn-api-sso/static/js/main.e0ebb7af.js",
     "index.html": "/arn-api-sso/index.html",
     "main.d84c3858.css.map": "/arn-api-sso/static/css/main.d84c3858.css.map",
-    "main.dfd2537b.js.map": "/arn-api-sso/static/js/main.dfd2537b.js.map"
+    "main.e0ebb7af.js.map": "/arn-api-sso/static/js/main.e0ebb7af.js.map"
   },
   "entrypoints": [
     "static/css/main.d84c3858.css",
-    "static/js/main.dfd2537b.js"
+    "static/js/main.e0ebb7af.js"
   ]
 }
