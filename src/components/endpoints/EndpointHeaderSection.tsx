@@ -7,7 +7,7 @@ interface EndpointHeaderSectionProps {
   endpointDescription?: string;
   category?: string;
   id?: string;
-  description?: string;
+  description?: string | React.ReactNode;
 }
 
 /**
@@ -36,8 +36,8 @@ const EndpointHeaderSection: React.FC<EndpointHeaderSectionProps> = ({
       ) : (
         <p>
           {category === 'typeahead'
-            ? `This endpoint allows you to ${description?.toLowerCase() || 'search'}. It's useful for interfaces where the user types a ${id?.split('-')[0] || 'search'} name and receives real-time suggestions.`
-            : `This endpoint allows you to ${description?.toLowerCase() || 'perform operations'}.`
+            ? `This endpoint allows you to ${typeof description === 'string' ? description.toLowerCase() : 'search'}. It's useful for interfaces where the user types a ${id?.split('-')[0] || 'search'} name and receives real-time suggestions.`
+            : `This endpoint allows you to ${typeof description === 'string' ? description.toLowerCase() : 'perform operations'}.`
           }
         </p>
       )}
